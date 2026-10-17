@@ -1,0 +1,81 @@
+import pandas as pd
+from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment
+from openpyxl.utils import get_column_letter
+from openpyxl.cell import WriteOnlyCell
+
+D = pd.read_csv("data/simulated_tasks_50000.csv")
+PIL = pd.read_csv("data/pilot_observed.csv")
+HF, HFont, B = PatternFill("solid", start_color="1F3864"), Font(name="Arial", bold=True, color="FFFFFF", size=10), Font(name="Arial", size=10)
+DICT = {
+ "record_id": "Unique record (one accepted content asset under one workflow)", "task_id": "Paired task; the same task is produced under all 5 workflows",
+ "workflow": "Manual | Prompt-only | RAG (dense) | Hybrid RAG (ablation arm, assumption-driven) | RAG+HITL (hybrid + rerank + 6-gate review)",
+ "execution_order": "Randomised order of the 5 workflows within the task", "brief_id": "Segment brief B001-B010 (pilot brief IDs)",
+ "segment": "Customer segment", "client_code": "Fictional client code (C1 = EcoFresh Africa, pilot client)", "sector": "Client sector",
+ "content_type": "Ad Copy | Social Post | Product Description | Email Newsletter | Blog Article", "nominal_words": "Target length (social post = 150-200 words as in pilot prompt)",
+ "market": "Lagos | Nairobi | Accra", "country": "Nigeria | Kenya | Ghana", "language": "English, Yoruba, Swahili, Twi", "language_type": "English | Local",
+ "replicate": "Replicate (Lagos 1-10; Nairobi/Accra 1-5)", "week": "Study week 1-12", "peak_season": "1 = weeks 10-12 (Q4 festive peak)",
+ "pilot_anchor_cell": "1 = pilot client x Lagos x Social Post (the cell calibrated to the observed pilot)",
+ "evidence_basis": "Pilot-anchored (Lagos) or literature-extrapolated (Nairobi/Accra); ablation arm flagged",
+ "editor_id": "Writer / AI Editor", "editor_ai_experience_months": "Prior GenAI experience (months)", "native_speaker_review": "1 = local-language output reviewed by native-speaker AI Editor (RAG+HITL)",
+ "gen_or_draft_min": "Manual drafting, or prompt preparation + generation + retrieval (min)", "editing_min": "Human editing to acceptance (min)",
+ "total_min": "Total production time (min)", "revisions": "Revision rounds to acceptance", "major_edits": "Major editorial interventions (report Table 4.10)",
+ "minor_edits": "Minor editorial interventions (report Table 4.10)", "first_pass_accepted": "1 = first draft accepted without major revision", "turnaround_days": "Calendar days brief-to-approval incl. queueing",
+ "rater1_overall": "Blinded rater 1 overall quality (1-5, half-point)", "rater2_overall": "Blinded rater 2", "rater3_overall": "Blinded rater 3", "overall_quality": "Mean of 3 blinded raters (holistic rating)",
+ "q_brand_consistency": "Quality rubric: brand voice (1-5)", "q_factual_accuracy": "Quality rubric: accuracy vs approved sources", "q_readability": "Quality rubric: readability",
+ "q_personalisation": "Quality rubric: personalisation to segment", "q_grammar": "Quality rubric: grammar", "q_cta": "Quality rubric: call to action", "q_compliance": "Quality rubric: legal/regulatory compliance",
+ "ml_factual_retention": "Multilingual rubric: factual retention", "ml_fluency": "Multilingual rubric: fluency", "ml_brand_tone": "Multilingual rubric: brand tone", "ml_cultural_fit": "Multilingual rubric: cultural fit",
+ "segment_distinctiveness": "Semantic distance between segment variants (0-1)",
+ "err_unsupported_claims": "Audit: unsupported claims", "err_missing_citations": "Audit: missing citations", "err_incorrect_facts": "Audit: incorrect facts",
+ "err_wrong_tone": "Audit: wrong tone", "err_generic_copy": "Audit: generic copy", "err_missing_cta": "Audit: missing CTA", "err_unsupported_statistic": "Audit: unsupported statistic", "err_outdated_claim": "Audit: outdated claim",
+ "hallucination_errors": "Report definition: unsupported claims + missing citations + incorrect facts", "total_errors": "Sum of all 8 audited error types",
+ "factual_claims": "Checkable claims in asset", "unsupported_or_incorrect_claims": "Claims unsupported/incorrect/unsourced statistic/outdated", "supported_claim_rate": "1 - bad claims / claims",
+ "max_similarity": "Max n-gram similarity to reference corpus", "copyright_flag": "1 = similarity > 0.30", "retrieved_docs": "Documents injected into context",
+ "hit_at_3": "Relevant doc in top 3", "precision_at_3": "Relevant in top 3 / 3", "recall_at_3": "Relevant in top 3 / relevant in KB", "reciprocal_rank": "1/rank of first relevant (0 if none in top 3)",
+ "input_tokens": "LLM input tokens", "output_tokens": "LLM output tokens", "latency_s": "Retrieval + time-to-first-token (s)", "api_cost_usd": "GPT-4o + embedding API cost (US$)",
+ "platform_cost_usd": "Amortised vector DB / monitoring cost", "labour_rate_usd_h": "Market fully loaded labour rate (Lagos from pilot; others assumption)",
+ "labour_cost_uniform_usd": "Active minutes x market rate (all workflows)", "total_cost_uniform_usd": "PRIMARY cost per accepted asset",
+ "labour_cost_report_rate_usd": "Scenario reproducing the preliminary report: AI-assisted work at 50% of rate", "total_cost_report_rate_usd": "Report-rate scenario cost per asset",
+ "hitl_primary_intervention": "Main HITL intervention type (report Table 4.11 categories)", "data_status": "Every row SYNTHETIC",
+}
+wb = Workbook(write_only=True)
+def hdr(ws, cols):
+    row = []
+    for c in cols:
+        cell = WriteOnlyCell(ws, value=c); cell.font = HFont; cell.fill = HF; row.append(cell)
+    ws.append(row)
+ws = wb.create_sheet("README"); ws.column_dimensions["A"].width = 150
+for t in ["GenAI Creative Engine — 50,000-record simulated extension", "",
+          "STATUS: every Data row is SYNTHETIC (seeded simulation, seed 20260930). It is anchored to the OBSERVED Lagos pilot (sheet Pilot_Observed) and to literature effect directions.",
+          "Design: 5 workflows x 10,000 paired tasks = 50,000 observations x 78 variables. Tasks = 5 fictional clients x 10 segments x 5 content types x 2 languages x replicates (Lagos 10, Nairobi 5, Accra 5).",
+          "Calibration: the pilot anchor cell (EcoFresh x Lagos x Social Post, off-peak) reproduces all 60 observed pilot measures within 2 standard errors (sheet Calibration_Audit).",
+          "Hybrid RAG is an ablation arm whose parameters are an explicit assumption (retrieval = 40% of time/quality gain, 60% of factual-error gain); it is not observed.",
+          "Costs: total_cost_uniform_usd (same labour rate for all workflows; primary) and total_cost_report_rate_usd (AI-assisted labour at 50% rate, reproducing the report's US$1.56).",
+          "Tables T1-T5: pilot anchor cell, off-peak, mean per brief; compare with the observed pilot values alongside."]:
+    ws.append([t])
+ws = wb.create_sheet("Data"); hdr(ws, list(D.columns))
+for r in D.itertuples(index=False):
+    ws.append([None if (isinstance(v, float) and v != v) else v for v in r])
+ws = wb.create_sheet("Dictionary"); hdr(ws, ["Variable", "Definition"])
+for c in D.columns: ws.append([c, DICT.get(c, "")])
+ws = wb.create_sheet("Pilot_Observed"); hdr(ws, list(PIL.columns))
+for r in PIL.itertuples(index=False): ws.append([None if (isinstance(v, float) and v != v) else v for v in r])
+cal = pd.read_csv("results/A_calibration_audit.csv", index_col=0)
+ws = wb.create_sheet("Calibration_Audit"); hdr(ws, list(cal.columns))
+for r in cal.round(3).itertuples(index=False): ws.append(list(r))
+for name, f in [("T1_Manual", "T1_manual"), ("T2_Prompt-only", "T2_prompt"), ("T3_RAG", "T3_rag"), ("T3b_HybridRAG_ablation", "T3b_hybridrag"),
+                ("T4_RAG+HITL", "T4_raghitl"), ("T5_Yoruba_RAG+HITL", "T5_yoruba_raghitl")]:
+    t = pd.read_csv(f"results/{f}.csv").round(2)
+    wf = {"T1_Manual": "Manual", "T2_Prompt-only": "Prompt-only", "T3_RAG": "RAG", "T4_RAG+HITL": "RAG+HITL", "T5_Yoruba_RAG+HITL": "RAG+HITL"}.get(name)
+    lang = "Yoruba" if "Yoruba" in name else "English"
+    if wf:
+        p = PIL[(PIL.workflow == wf) & (PIL.language == lang)].set_index("brief_id")
+        t["observed_total_min"] = [p.total_min.get(b, p.total_min.mean()) for b in t.brief_id]
+        if lang == "English": t["observed_quality"] = [p.quality.get(b, p.quality.mean()) for b in t.brief_id]
+        else: t["observed_cultural_fit"] = [p.cultural_fit.get(b, p.cultural_fit.mean()) for b in t.brief_id]
+    ws = wb.create_sheet(name); hdr(ws, list(t.columns))
+    for r in t.itertuples(index=False): ws.append(list(r))
+for n, f in [("Hypotheses", "E_hypotheses"), ("Paired_Contrasts", "C_paired_contrasts"), ("Scale_Gates", "I3_scale_gates"), ("Heterogeneity", "F1_heterogeneity")]:
+    t = pd.read_csv(f"results/{f}.csv"); ws = wb.create_sheet(n); hdr(ws, list(t.columns))
+    for r in t.round(3).itertuples(index=False): ws.append([None if (isinstance(v, float) and v != v) else v for v in r])
+wb.save("data/simulated_tasks_50000.xlsx"); print("ok")
