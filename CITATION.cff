@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite the article and this repository."
+title: "From Fast Drafts to Accepted Assets: code and data"
+type: software
+authors:
+  - family-names: Uba
+    given-names: Ebere Josephine
+    affiliation: "School of Computer, Data and Mathematical Sciences, Western Sydney University"
+  - family-names: Olugbenga
+    given-names: Ejidokun Adekunle
+    affiliation: "Miva Open University"
+license: MIT
+repository-code: "https://github.com/Ebere20/accepted-assets-genai"
+keywords:
+  - generative AI
+  - retrieval-augmented generation
+  - human-in-the-loop
+  - marketing workflows
+  - simulation
