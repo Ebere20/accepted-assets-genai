@@ -1,0 +1,150 @@
+{
+  "means": {
+    "Manual": {
+      "gen_or_draft_min": 33.4,
+      "editing_min": 14.7,
+      "total_min": 48.1,
+      "revisions": 2.1,
+      "quality": 4.21,
+      "api_cost_usd": 0.0,
+      "total_cost_usd": 12.025
+    },
+    "Prompt-only": {
+      "gen_or_draft_min": 3.1,
+      "editing_min": 17.6,
+      "total_min": 20.7,
+      "revisions": 3.2,
+      "quality": 3.59,
+      "api_cost_usd": 0.036,
+      "total_cost_usd": 5.211
+    },
+    "RAG": {
+      "gen_or_draft_min": 4.1,
+      "editing_min": 11.0,
+      "total_min": 15.1,
+      "revisions": 2.1,
+      "quality": 4.09,
+      "api_cost_usd": 0.056,
+      "total_cost_usd": 3.831
+    },
+    "RAG+HITL": {
+      "gen_or_draft_min": 4.1,
+      "editing_min": 8.0,
+      "total_min": 12.1,
+      "revisions": 1.9,
+      "quality": 4.49,
+      "api_cost_usd": 0.056,
+      "total_cost_usd": 3.081
+    }
+  },
+  "paired": {
+    "Prompt-only vs Manual": {
+      "time_reduction": 56.96465696465697,
+      "ci": [
+        56.08097303059989,
+        57.97101449275361
+      ],
+      "wilcoxon_time_p": 0.001953125,
+      "q_diff": -0.6199999999999998,
+      "q_ci": [
+        -0.6764281137215163,
+        -0.5635718862784832
+      ],
+      "t_q": -24.855295497855472,
+      "p_q": 1.3255677159502267e-09,
+      "wilcoxon_q_p": 0.001953125,
+      "cost_reduction": 56.66528066528067
+    },
+    "RAG vs Manual": {
+      "time_reduction": 68.60706860706861,
+      "ci": [
+        67.89366053169734,
+        69.26315789473685
+      ],
+      "wilcoxon_time_p": 0.001953125,
+      "q_diff": -0.12000000000000015,
+      "q_ci": [
+        -0.15016209550397622,
+        -0.08983790449602408
+      ],
+      "t_q": -9.000000000000007,
+      "p_q": 8.538051223166219e-06,
+      "wilcoxon_q_p": 0.001953125,
+      "cost_reduction": 68.14137214137213
+    },
+    "RAG+HITL vs Manual": {
+      "time_reduction": 74.84407484407485,
+      "ci": [
+        74.373795761079,
+        75.31126842479904
+      ],
+      "wilcoxon_time_p": 0.001953125,
+      "q_diff": 0.27999999999999997,
+      "q_ci": [
+        0.24983790449602397,
+        0.31016209550397594
+      ],
+      "t_q": 21.000000000000046,
+      "p_q": 5.901994059532747e-09,
+      "wilcoxon_q_p": 0.001953125,
+      "cost_reduction": 74.37837837837839
+    },
+    "RAG vs Prompt-only": {
+      "time_reduction": 27.053140096618357,
+      "wilcoxon_time_p": 0.001953125,
+      "q_diff": 0.49999999999999983,
+      "wilcoxon_q_p": 0.001953125
+    },
+    "RAG+HITL vs RAG": {
+      "time_reduction": 19.867549668874172,
+      "wilcoxon_time_p": 0.001953125,
+      "q_diff": 0.4000000000000002,
+      "wilcoxon_q_p": 0.001953125
+    }
+  },
+  "friedman_time": {
+    "chi2": 30.0,
+    "p": 1.3800570312932553e-06
+  },
+  "friedman_quality": {
+    "chi2": 30.0,
+    "p": 1.3800570312932553e-06
+  },
+  "yoruba": {
+    "total": 16.3,
+    "edit": 11.2,
+    "gen": 5.1,
+    "fact": 4.01,
+    "flu": 3.5700000000000003,
+    "tone": 3.7399999999999998,
+    "cult": 3.46,
+    "edit_vs_english_p": 0.001953125
+  },
+  "errors": {
+    "Prompt-only": [
+      8,
+      5,
+      3,
+      16
+    ],
+    "RAG": [
+      2,
+      1,
+      1,
+      4
+    ],
+    "RAG+HITL": [
+      1,
+      0,
+      1,
+      2
+    ]
+  },
+  "kappa": {
+    "Brand": 0.78,
+    "Factual": 0.82,
+    "Readability": 0.74,
+    "Personalisation": 0.71,
+    "Overall": 0.76
+  }
+}
