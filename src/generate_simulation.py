@@ -2,9 +2,8 @@
 GenAI Creative Engine - 50,000-record SIMULATED (synthetic) extension of the observed pilot
 ===================================================================================
 Every value produced here is SIMULATED. It is anchored to the OBSERVED Phase-1
-Lagos pilot (per-brief values, Tables 4.1, 4.3-4.8, 4.10, 4.18, 4.19 and 3.9 of
-the preliminary technical report) and to effect directions reported in the
-supporting literature. It must be labelled synthetic in any publication.
+Lagos pilot (observed per-brief records, data/pilot_observed.csv) and to effect
+directions reported in the supporting literature. It must be labelled synthetic in any publication.
 
 Design (paired across workflows):
   5 workflows x 10,000 tasks = 50,000 records
@@ -12,7 +11,7 @@ Design (paired across workflows):
           replicates: Lagos 10 (HQ / pilot site, 50% of volume), Nairobi 5, Accra 5
 Anchor cell  = pilot client (EcoFresh, FMCG) x Lagos x English x Social Post x off-peak
                -> reproduces the observed per-brief pilot values in expectation.
-Yoruba anchor = same cell in Yoruba under RAG+HITL (report Table 4.18).
+Yoruba anchor = same cell in Yoruba under RAG+HITL (observed pilot).
 """
 import itertools, numpy as np, pandas as pd
 
@@ -23,7 +22,7 @@ rng = np.random.default_rng(SEED)
 SEGS = ["Students", "Young Professionals", "Working Mothers", "Fitness Enthusiasts", "Entrepreneurs",
         "Senior Adults", "Rural Communities", "Premium Customers", "Environmentally Conscious", "Corporate Buyers"]
 BID = [f"B{i:03d}" for i in range(1, 11)]
-P = {  # per-brief observed values, Lagos English social post (report Tables 4.1, 4.3, 4.4, 4.5)
+P = {  # per-brief observed values, Lagos English social post (observed pilot)
  "Manual":   dict(gen=[28,31,34,30,35,35,39,33,32,37], edit=[12,14,15,13,15,16,18,14,14,16], rev=[2,2,2,2,2,2,3,2,2,2],
                   q=[4.2,4.2,4.3,4.2,4.3,4.1,4.0,4.3,4.2,4.3], api=[0]*10, docs=[0]*10),
  "Prompt-only": dict(gen=[3,3,3,3,3,3,4,3,3,3], edit=[15,16,18,16,18,19,21,18,17,18], rev=[3,3,3,3,3,3,4,3,3,4],
@@ -33,20 +32,20 @@ P = {  # per-brief observed values, Lagos English social post (report Tables 4.1
  "RAG+HITL": dict(gen=[4,4,4,4,4,4,5,4,4,4], edit=[6,7,8,7,8,9,10,8,8,9], rev=[1,2,2,2,2,2,2,2,2,2],
                   q=[4.5,4.5,4.6,4.5,4.5,4.4,4.3,4.6,4.5,4.5], api=[.05,.05,.06,.05,.06,.05,.06,.06,.06,.06], docs=[5]*10),
 }
-# Yoruba RAG+HITL per brief (Table 4.18)
+# Yoruba RAG+HITL per brief (observed pilot)
 YOR = dict(gen=[5,5,5,5,5,5,6,5,5,5], edit=[10,10,11,10,11,12,14,11,11,12], rev=[2,2,2,2,2,3,3,2,2,2],
            fact=[4.1,4.1,4.0,4.1,4.0,3.9,3.8,4.1,4.0,4.0], flu=[3.6,3.7,3.6,3.7,3.6,3.4,3.3,3.7,3.6,3.5],
            tone=[3.8,3.8,3.7,3.8,3.7,3.6,3.5,3.9,3.8,3.8], cult=[3.5,3.6,3.5,3.5,3.5,3.3,3.2,3.6,3.5,3.4])
-# Quality-rubric dimension means (Table 4.6): brand, factual, readability, personalisation
+# Quality-rubric dimension means (observed pilot): brand, factual, readability, personalisation
 QD = {"Manual": (4.4, 4.5, 4.3, 3.8), "Prompt-only": (3.4, 3.3, 4.0, 4.1), "RAG": (4.0, 4.5, 4.1, 4.2), "RAG+HITL": (4.6, 4.7, 4.4, 4.5)}
-# Multilingual rubric, English (Table 4.19 RAG+HITL: 4.5/4.6/4.4/4.5); other arms = ASSUMPTION
+# Multilingual rubric, English (observed pilot RAG+HITL: 4.5/4.6/4.4/4.5); other arms = ASSUMPTION
 ML = {"Manual": (4.5, 4.5, 4.4, 4.4), "Prompt-only": (3.4, 4.1, 3.4, 3.8), "RAG": (4.4, 4.2, 4.0, 4.0), "RAG+HITL": (4.5, 4.6, 4.4, 4.5)}
 # Errors per 10 briefs (Tables 4.7 + 4.8 unified): unsupported, missing_cit, incorrect, tone, generic, cta, stat, outdated
 ERR = {"Prompt-only": (8, 5, 3, 4, 3, 2, 3, 1), "RAG": (2, 1, 1, 1, 1, 0, 0, 0), "RAG+HITL": (1, 0, 1, 1, 0, 0, 0, 0),
        "Manual": (1.0, 1.0, 0.5, 0.5, 1.5, 0.5, 0.5, 0.5)}           # Manual not audited in pilot -> ASSUMPTION
 ETYPES = ["unsupported_claims", "missing_citations", "incorrect_facts", "wrong_tone", "generic_copy",
           "missing_cta", "unsupported_statistic", "outdated_claim"]
-# Editing interventions per 10 briefs (Table 4.10): major, minor; first-draft acceptance
+# Editing interventions per 10 briefs (observed pilot): major, minor; first-draft acceptance
 EDITS = {"Prompt-only": (3, 14, .60), "RAG": (1, 11, .80), "RAG+HITL": (1, 8, .90), "Manual": (1, 9, .70)}  # Manual = ASSUMPTION
 
 # ------------------------------------------------------------------ ablation arm (ASSUMPTION)
@@ -241,7 +240,7 @@ for (mkt, rep, sec, cc, cx, risk, si, ct, is_loc) in combos:
             api = 0.0; tin = tout = 0; latency = np.nan
         active = total - (0 if not ai else latency / 60 * revisions)
         lab_u = active / 60 * M["rate"]                               # uniform-rate scheme (primary)
-        lab_r = active / 60 * M["rate"] * (0.5 if ai else 1.0)        # report-rate scenario (AI Editor at 50% rate)
+        lab_r = active / 60 * M["rate"] * (0.5 if ai else 1.0)        # sensitivity scenario (AI-assisted editing at 50% rate)
         platform = .03 if wf in ("RAG", "Hybrid RAG", "RAG+HITL") else 0
         ta = float(np.exp(rng.normal(np.log((9.0 if peak else 2.0) if not ai else (.7 if wf == "RAG+HITL" else .6) * (2.2 if peak else 1)), .35))) * C["md"] ** .3
         intervention = rng.choice(["Brand voice correction", "Factual verification", "Cultural localisation", "CTA optimisation", "Compliance review"],

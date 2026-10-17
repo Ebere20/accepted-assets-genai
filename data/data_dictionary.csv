@@ -25,8 +25,8 @@ gen_or_draft_min,"Manual drafting, or prompt preparation + generation + retrieva
 editing_min,Human editing to acceptance (min)
 total_min,Total production time (min)
 revisions,Revision rounds to acceptance
-major_edits,Major editorial interventions (report Table 4.10)
-minor_edits,Minor editorial interventions (report Table 4.10)
+major_edits,Major editorial interventions (pilot categories)
+minor_edits,Minor editorial interventions (pilot categories)
 first_pass_accepted,1 = first draft accepted without major revision
 turnaround_days,Calendar days brief-to-approval incl. queueing
 rater1_overall,"Blinded rater 1 overall quality (1-5, half-point)"
@@ -53,7 +53,7 @@ err_generic_copy,Audit: generic copy
 err_missing_cta,Audit: missing CTA
 err_unsupported_statistic,Audit: unsupported statistic
 err_outdated_claim,Audit: outdated claim
-hallucination_errors,Report definition: unsupported claims + missing citations + incorrect facts
+hallucination_errors,Definition: unsupported claims + missing citations + incorrect facts
 total_errors,Sum of all 8 audited error types
 factual_claims,Checkable claims in asset
 unsupported_or_incorrect_claims,Claims unsupported/incorrect/unsourced statistic/outdated
@@ -73,7 +73,7 @@ platform_cost_usd,Amortised vector DB / monitoring cost
 labour_rate_usd_h,Market fully loaded labour rate (Lagos from pilot; others assumption)
 labour_cost_uniform_usd,Active minutes x market rate (all workflows)
 total_cost_uniform_usd,PRIMARY cost per accepted asset
-labour_cost_report_rate_usd,Scenario reproducing the preliminary report: AI-assisted work at 50% of rate
-total_cost_report_rate_usd,Report-rate scenario cost per asset
-hitl_primary_intervention,Main HITL intervention type (report Table 4.11 categories)
+labour_cost_report_rate_usd,Sensitivity scenario: AI-assisted work paid at 50% of the writer rate
+total_cost_report_rate_usd,Sensitivity-scenario cost per asset (AI-assisted work at 50% rate)
+hitl_primary_intervention,Main HITL intervention type (pilot categories)
 data_status,Every row SYNTHETIC

@@ -1,7 +1,7 @@
 """
 Phase 1 EMPIRICAL pilot (observed data, Lagos, 10 briefs).
-Per-brief values transcribed from the preliminary technical report
-(Tables 4.1, 4.3, 4.4, 4.5, 4.18). Costs recomputed with one uniform labour
+Observed per-brief pilot records (time, revisions, quality, errors and costs).
+Costs computed with one uniform labour
 rate (US$15/h, the rate implied by the manual baseline) + observed API cost.
 """
 import json
@@ -82,7 +82,7 @@ out["yoruba"] = dict(total=float(Y.total_min.mean()), edit=float(Y.editing_min.m
                      fact=float(Y.factual_retention.mean()), flu=float(Y.fluency.mean()), tone=float(Y.brand_tone.mean()),
                      cult=float(Y.cultural_fit.mean()),
                      edit_vs_english_p=float(stats.wilcoxon(yh.editing_min, eng_h.editing_min).pvalue))
-# pilot error audit (Table 4.7) & rater agreement (Table 3.9) - observed
+# pilot error audit & rater agreement - observed
 out["errors"] = {"Prompt-only": [8, 5, 3, 16], "RAG": [2, 1, 1, 4], "RAG+HITL": [1, 0, 1, 2]}
 out["kappa"] = {"Brand": 0.78, "Factual": 0.82, "Readability": 0.74, "Personalisation": 0.71, "Overall": 0.76}
 json.dump(out, open("results/pilot_summary.json", "w"), indent=2)

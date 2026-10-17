@@ -23,7 +23,7 @@ for wf in ["Manual", "Prompt-only", "RAG", "RAG+HITL"]:
         m, se = s[sv].mean(), s[sv].std(ddof=1) / np.sqrt(len(s))
         cal.append(dict(workflow=wf, language="English", measure=sv, observed_pilot=o[ov].mean(), synthetic=m,
                         diff=m - o[ov].mean(), z=(m - o[ov].mean()) / se, n_synth=len(s)))
-    # quality dims (report Table 4.6)
+    # quality dims (observed pilot rubric)
     for sv, val in zip(["q_brand_consistency", "q_factual_accuracy", "q_readability", "q_personalisation"],
                        {"Manual": (4.4, 4.5, 4.3, 3.8), "Prompt-only": (3.4, 3.3, 4.0, 4.1), "RAG": (4.0, 4.5, 4.1, 4.2), "RAG+HITL": (4.6, 4.7, 4.4, 4.5)}[wf]):
         m, se = s[sv].mean(), s[sv].std(ddof=1) / np.sqrt(len(s))
@@ -155,7 +155,7 @@ addH("H5", "RAG+HITL sustains quality ≥4.0 in all 10 segments and raises segme
      f"{(seg >= 4).sum()}/10 segments ≥4.0 (min {seg.min():.2f}); distinctiveness {Wd['RAG+HITL'].mean():.2f} vs {Wd['Manual'].mean():.2f}",
      "Segment means; paired t-test", "<0.001", "Yes" if (seg >= 4).sum() == 10 else "Partly")
 addH("H6", "RAG+HITL cuts cost per accepted asset by ≥40% (competitor gap; RQ6)",
-     f"Uniform rate: {c.cost_red_uniform:.1f}% ({c.cu_lo:.1f}–{c.cu_hi:.1f}); report-rate scenario: {c.cost_red_reportrate:.1f}% ({c.cr_lo:.1f}–{c.cr_hi:.1f})",
+     f"Uniform rate: {c.cost_red_uniform:.1f}% ({c.cu_lo:.1f}–{c.cu_hi:.1f}); half-rate scenario: {c.cost_red_reportrate:.1f}% ({c.cr_lo:.1f}–{c.cr_hi:.1f})",
      "Task-clustered bootstrap", "<0.001", "Yes (both schemes)" if (c.cu_lo > 40 and c.cr_lo > 40) else "Partly")
 hh = D[D.workflow.isin(["RAG", "RAG+HITL"])]
 gap = hh.groupby(["workflow", "language"]).ml_cultural_fit.mean().unstack(); gap = gap.sub(gap["English"], axis=0)
@@ -312,7 +312,7 @@ ax.set_xlabel("Study week (weeks 10–12 = peak season)"); ax.set_ylabel("Mean e
 fig.savefig("figures/fig9_learning.png"); plt.close()
 # F8 cost by market, two schemes
 fig, axs = plt.subplots(1, 2, figsize=(6.8, 2.9), sharey=True)
-for ax, col, t in zip(axs, ["total_cost_uniform_usd", "total_cost_report_rate_usd"], ["Uniform labour rate", "Report-rate scenario (AI Editor at 50%)"]):
+for ax, col, t in zip(axs, ["total_cost_uniform_usd", "total_cost_report_rate_usd"], ["Uniform labour rate", "AI-assisted editing at half the writer rate"]):
     cm = D.groupby(["market", "workflow"])[col].mean().unstack()[WF].reindex(["Lagos", "Nairobi", "Accra"]); xx = np.arange(3)
     for i, wf in enumerate(WF): ax.bar(xx + (i - 2) * w_, cm[wf], width=w_ - .02, color=C[wf], label=wf)
     ax.set_xticks(xx, ["Lagos", "Nairobi", "Accra"]); ax.set_title(t, fontsize=9); ax.grid(axis="x", visible=False)

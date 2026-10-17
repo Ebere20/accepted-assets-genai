@@ -389,7 +389,7 @@
   },
   "H6": {
    "statement": "RAG+HITL cuts cost per accepted asset by \u226540% (competitor gap; RQ6)",
-   "estimate": "Uniform rate: 73.5% (73.3\u201373.6); report-rate scenario: 86.3% (86.2\u201386.4)",
+   "estimate": "Uniform rate: 73.5% (73.3\u201373.6); half-rate scenario: 86.3% (86.2\u201386.4)",
    "test": "Task-clustered bootstrap",
    "p": "<0.001",
    "supported": "Yes (both schemes)"

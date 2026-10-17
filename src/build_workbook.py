@@ -19,8 +19,8 @@ DICT = {
  "evidence_basis": "Pilot-anchored (Lagos) or literature-extrapolated (Nairobi/Accra); ablation arm flagged",
  "editor_id": "Writer / AI Editor", "editor_ai_experience_months": "Prior GenAI experience (months)", "native_speaker_review": "1 = local-language output reviewed by native-speaker AI Editor (RAG+HITL)",
  "gen_or_draft_min": "Manual drafting, or prompt preparation + generation + retrieval (min)", "editing_min": "Human editing to acceptance (min)",
- "total_min": "Total production time (min)", "revisions": "Revision rounds to acceptance", "major_edits": "Major editorial interventions (report Table 4.10)",
- "minor_edits": "Minor editorial interventions (report Table 4.10)", "first_pass_accepted": "1 = first draft accepted without major revision", "turnaround_days": "Calendar days brief-to-approval incl. queueing",
+ "total_min": "Total production time (min)", "revisions": "Revision rounds to acceptance", "major_edits": "Major editorial interventions (pilot categories)",
+ "minor_edits": "Minor editorial interventions (pilot categories)", "first_pass_accepted": "1 = first draft accepted without major revision", "turnaround_days": "Calendar days brief-to-approval incl. queueing",
  "rater1_overall": "Blinded rater 1 overall quality (1-5, half-point)", "rater2_overall": "Blinded rater 2", "rater3_overall": "Blinded rater 3", "overall_quality": "Mean of 3 blinded raters (holistic rating)",
  "q_brand_consistency": "Quality rubric: brand voice (1-5)", "q_factual_accuracy": "Quality rubric: accuracy vs approved sources", "q_readability": "Quality rubric: readability",
  "q_personalisation": "Quality rubric: personalisation to segment", "q_grammar": "Quality rubric: grammar", "q_cta": "Quality rubric: call to action", "q_compliance": "Quality rubric: legal/regulatory compliance",
@@ -28,15 +28,15 @@ DICT = {
  "segment_distinctiveness": "Semantic distance between segment variants (0-1)",
  "err_unsupported_claims": "Audit: unsupported claims", "err_missing_citations": "Audit: missing citations", "err_incorrect_facts": "Audit: incorrect facts",
  "err_wrong_tone": "Audit: wrong tone", "err_generic_copy": "Audit: generic copy", "err_missing_cta": "Audit: missing CTA", "err_unsupported_statistic": "Audit: unsupported statistic", "err_outdated_claim": "Audit: outdated claim",
- "hallucination_errors": "Report definition: unsupported claims + missing citations + incorrect facts", "total_errors": "Sum of all 8 audited error types",
+ "hallucination_errors": "Definition: unsupported claims + missing citations + incorrect facts", "total_errors": "Sum of all 8 audited error types",
  "factual_claims": "Checkable claims in asset", "unsupported_or_incorrect_claims": "Claims unsupported/incorrect/unsourced statistic/outdated", "supported_claim_rate": "1 - bad claims / claims",
  "max_similarity": "Max n-gram similarity to reference corpus", "copyright_flag": "1 = similarity > 0.30", "retrieved_docs": "Documents injected into context",
  "hit_at_3": "Relevant doc in top 3", "precision_at_3": "Relevant in top 3 / 3", "recall_at_3": "Relevant in top 3 / relevant in KB", "reciprocal_rank": "1/rank of first relevant (0 if none in top 3)",
  "input_tokens": "LLM input tokens", "output_tokens": "LLM output tokens", "latency_s": "Retrieval + time-to-first-token (s)", "api_cost_usd": "GPT-4o + embedding API cost (US$)",
  "platform_cost_usd": "Amortised vector DB / monitoring cost", "labour_rate_usd_h": "Market fully loaded labour rate (Lagos from pilot; others assumption)",
  "labour_cost_uniform_usd": "Active minutes x market rate (all workflows)", "total_cost_uniform_usd": "PRIMARY cost per accepted asset",
- "labour_cost_report_rate_usd": "Scenario reproducing the preliminary report: AI-assisted work at 50% of rate", "total_cost_report_rate_usd": "Report-rate scenario cost per asset",
- "hitl_primary_intervention": "Main HITL intervention type (report Table 4.11 categories)", "data_status": "Every row SYNTHETIC",
+ "labour_cost_report_rate_usd": "Sensitivity scenario: AI-assisted work paid at 50% of the writer rate", "total_cost_report_rate_usd": "Sensitivity-scenario cost per asset (AI-assisted work at 50% rate)",
+ "hitl_primary_intervention": "Main HITL intervention type (pilot categories)", "data_status": "Every row SYNTHETIC",
 }
 wb = Workbook(write_only=True)
 def hdr(ws, cols):
@@ -50,7 +50,7 @@ for t in ["GenAI Creative Engine — 50,000-record simulated extension", "",
           "Design: 5 workflows x 10,000 paired tasks = 50,000 observations x 78 variables. Tasks = 5 fictional clients x 10 segments x 5 content types x 2 languages x replicates (Lagos 10, Nairobi 5, Accra 5).",
           "Calibration: the pilot anchor cell (EcoFresh x Lagos x Social Post, off-peak) reproduces all 60 observed pilot measures within 2 standard errors (sheet Calibration_Audit).",
           "Hybrid RAG is an ablation arm whose parameters are an explicit assumption (retrieval = 40% of time/quality gain, 60% of factual-error gain); it is not observed.",
-          "Costs: total_cost_uniform_usd (same labour rate for all workflows; primary) and total_cost_report_rate_usd (AI-assisted labour at 50% rate, reproducing the report's US$1.56).",
+          "Costs: total_cost_uniform_usd (same labour rate for all workflows; primary) and total_cost_report_rate_usd (AI-assisted labour at 50% rate; sensitivity scenario).",
           "Tables T1-T5: pilot anchor cell, off-peak, mean per brief; compare with the observed pilot values alongside."]:
     ws.append([t])
 ws = wb.create_sheet("Data"); hdr(ws, list(D.columns))

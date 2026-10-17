@@ -5,7 +5,7 @@ H2,Retrieval grounding reduces hallucination-related errors vs Prompt-only (O4),
 H3,Hybrid retrieval + structured HITL further reduces errors vs dense RAG (O4),77.0 → 38.6 per 100 assets,Wilcoxon signed-rank,<0.001,Yes
 H4,RAG+HITL brand consistency exceeds Prompt-only and is ≥ Manual (O3),vs PO 4.24 vs 2.97; English 4.56 vs Manual 4.36; local 3.92 vs 4.32,"Paired t-tests, stratified",<0.001,Yes (English); No (local languages)
 H5,RAG+HITL sustains quality ≥4.0 in all 10 segments and raises segment distinctiveness (O2),10/10 segments ≥4.0 (min 4.25); distinctiveness 0.61 vs 0.41,Segment means; paired t-test,<0.001,Yes
-H6,RAG+HITL cuts cost per accepted asset by ≥40% (competitor gap; RQ6),Uniform rate: 73.5% (73.3–73.6); report-rate scenario: 86.3% (86.2–86.4),Task-clustered bootstrap,<0.001,Yes (both schemes)
+H6,RAG+HITL cuts cost per accepted asset by ≥40% (competitor gap; RQ6),Uniform rate: 73.5% (73.3–73.6); half-rate scenario: 86.3% (86.2–86.4),Task-clustered bootstrap,<0.001,Yes (both schemes)
 H7,Local-language cultural-fit gap is ordered Swahili < Yoruba < Twi and narrowed by native-speaker HITL (RQ4),"HITL: Swahili -0.56, Yoruba -1.04, Twi -1.36; RAG: Swahili -0.71, Yoruba -1.30, Twi -1.69",Kruskal–Wallis,<0.001,Yes
 H8,Editing effort in RAG+HITL declines with AI-editing practice (O5),-13.9% week 1→12 (-1.22%/week),OLS on adjusted log editing time,<0.001,Yes
 H9,Hybrid retrieval + reranking outperforms dense retrieval (RQ2),Hit@3 0.905 vs 0.769; MRR 0.899 vs 0.763,McNemar χ²=651,<0.001,Yes
