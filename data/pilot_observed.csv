@@ -1,0 +1,51 @@
+brief_id,segment,workflow,market,language,content_type,gen_or_draft_min,editing_min,total_min,revisions,quality,api_cost_usd,labour_cost_usd,total_cost_usd,data_status,factual_retention,fluency,brand_tone,cultural_fit
+B001,Students,Manual,Lagos,English,Social Post,28,12,40,2,4.2,0.0,10.0,10.0,OBSERVED (empirical pilot),,,,
+B002,Young Professionals,Manual,Lagos,English,Social Post,31,14,45,2,4.2,0.0,11.25,11.25,OBSERVED (empirical pilot),,,,
+B003,Working Mothers,Manual,Lagos,English,Social Post,34,15,49,2,4.3,0.0,12.25,12.25,OBSERVED (empirical pilot),,,,
+B004,Fitness Enthusiasts,Manual,Lagos,English,Social Post,30,13,43,2,4.2,0.0,10.75,10.75,OBSERVED (empirical pilot),,,,
+B005,Entrepreneurs,Manual,Lagos,English,Social Post,35,15,50,2,4.3,0.0,12.5,12.5,OBSERVED (empirical pilot),,,,
+B006,Senior Adults,Manual,Lagos,English,Social Post,35,16,51,2,4.1,0.0,12.75,12.75,OBSERVED (empirical pilot),,,,
+B007,Rural Communities,Manual,Lagos,English,Social Post,39,18,57,3,4.0,0.0,14.25,14.25,OBSERVED (empirical pilot),,,,
+B008,Premium Customers,Manual,Lagos,English,Social Post,33,14,47,2,4.3,0.0,11.75,11.75,OBSERVED (empirical pilot),,,,
+B009,Environmentally Conscious,Manual,Lagos,English,Social Post,32,14,46,2,4.2,0.0,11.5,11.5,OBSERVED (empirical pilot),,,,
+B010,Corporate Buyers,Manual,Lagos,English,Social Post,37,16,53,2,4.3,0.0,13.25,13.25,OBSERVED (empirical pilot),,,,
+B001,Students,Prompt-only,Lagos,English,Social Post,3,15,18,3,3.7,0.03,4.5,4.53,OBSERVED (empirical pilot),,,,
+B002,Young Professionals,Prompt-only,Lagos,English,Social Post,3,16,19,3,3.7,0.03,4.75,4.78,OBSERVED (empirical pilot),,,,
+B003,Working Mothers,Prompt-only,Lagos,English,Social Post,3,18,21,3,3.6,0.04,5.25,5.29,OBSERVED (empirical pilot),,,,
+B004,Fitness Enthusiasts,Prompt-only,Lagos,English,Social Post,3,16,19,3,3.6,0.03,4.75,4.78,OBSERVED (empirical pilot),,,,
+B005,Entrepreneurs,Prompt-only,Lagos,English,Social Post,3,18,21,3,3.6,0.04,5.25,5.29,OBSERVED (empirical pilot),,,,
+B006,Senior Adults,Prompt-only,Lagos,English,Social Post,3,19,22,3,3.5,0.03,5.5,5.53,OBSERVED (empirical pilot),,,,
+B007,Rural Communities,Prompt-only,Lagos,English,Social Post,4,21,25,4,3.3,0.04,6.25,6.29,OBSERVED (empirical pilot),,,,
+B008,Premium Customers,Prompt-only,Lagos,English,Social Post,3,18,21,3,3.7,0.04,5.25,5.29,OBSERVED (empirical pilot),,,,
+B009,Environmentally Conscious,Prompt-only,Lagos,English,Social Post,3,17,20,3,3.6,0.04,5.0,5.04,OBSERVED (empirical pilot),,,,
+B010,Corporate Buyers,Prompt-only,Lagos,English,Social Post,3,18,21,4,3.6,0.04,5.25,5.29,OBSERVED (empirical pilot),,,,
+B001,Students,RAG,Lagos,English,Social Post,4,9,13,2,4.1,0.05,3.25,3.3,OBSERVED (empirical pilot),,,,
+B002,Young Professionals,RAG,Lagos,English,Social Post,4,10,14,2,4.1,0.05,3.5,3.55,OBSERVED (empirical pilot),,,,
+B003,Working Mothers,RAG,Lagos,English,Social Post,4,11,15,2,4.2,0.06,3.75,3.81,OBSERVED (empirical pilot),,,,
+B004,Fitness Enthusiasts,RAG,Lagos,English,Social Post,4,10,14,2,4.1,0.05,3.5,3.55,OBSERVED (empirical pilot),,,,
+B005,Entrepreneurs,RAG,Lagos,English,Social Post,4,11,15,2,4.1,0.06,3.75,3.81,OBSERVED (empirical pilot),,,,
+B006,Senior Adults,RAG,Lagos,English,Social Post,4,12,16,2,4.0,0.05,4.0,4.05,OBSERVED (empirical pilot),,,,
+B007,Rural Communities,RAG,Lagos,English,Social Post,5,14,19,3,3.9,0.06,4.75,4.81,OBSERVED (empirical pilot),,,,
+B008,Premium Customers,RAG,Lagos,English,Social Post,4,11,15,2,4.2,0.06,3.75,3.81,OBSERVED (empirical pilot),,,,
+B009,Environmentally Conscious,RAG,Lagos,English,Social Post,4,10,14,2,4.1,0.06,3.5,3.56,OBSERVED (empirical pilot),,,,
+B010,Corporate Buyers,RAG,Lagos,English,Social Post,4,12,16,2,4.1,0.06,4.0,4.06,OBSERVED (empirical pilot),,,,
+B001,Students,RAG+HITL,Lagos,English,Social Post,4,6,10,1,4.5,0.05,2.5,2.55,OBSERVED (empirical pilot),,,,
+B002,Young Professionals,RAG+HITL,Lagos,English,Social Post,4,7,11,2,4.5,0.05,2.75,2.8,OBSERVED (empirical pilot),,,,
+B003,Working Mothers,RAG+HITL,Lagos,English,Social Post,4,8,12,2,4.6,0.06,3.0,3.06,OBSERVED (empirical pilot),,,,
+B004,Fitness Enthusiasts,RAG+HITL,Lagos,English,Social Post,4,7,11,2,4.5,0.05,2.75,2.8,OBSERVED (empirical pilot),,,,
+B005,Entrepreneurs,RAG+HITL,Lagos,English,Social Post,4,8,12,2,4.5,0.06,3.0,3.06,OBSERVED (empirical pilot),,,,
+B006,Senior Adults,RAG+HITL,Lagos,English,Social Post,4,9,13,2,4.4,0.05,3.25,3.3,OBSERVED (empirical pilot),,,,
+B007,Rural Communities,RAG+HITL,Lagos,English,Social Post,5,10,15,2,4.3,0.06,3.75,3.81,OBSERVED (empirical pilot),,,,
+B008,Premium Customers,RAG+HITL,Lagos,English,Social Post,4,8,12,2,4.6,0.06,3.0,3.06,OBSERVED (empirical pilot),,,,
+B009,Environmentally Conscious,RAG+HITL,Lagos,English,Social Post,4,8,12,2,4.5,0.06,3.0,3.06,OBSERVED (empirical pilot),,,,
+B010,Corporate Buyers,RAG+HITL,Lagos,English,Social Post,4,9,13,2,4.5,0.06,3.25,3.31,OBSERVED (empirical pilot),,,,
+B001,Students,RAG+HITL,Lagos,Yoruba,Social Post,5,10,15,2,,,,,OBSERVED (empirical pilot),4.1,3.6,3.8,3.5
+B002,Young Professionals,RAG+HITL,Lagos,Yoruba,Social Post,5,10,15,2,,,,,OBSERVED (empirical pilot),4.1,3.7,3.8,3.6
+B003,Working Mothers,RAG+HITL,Lagos,Yoruba,Social Post,5,11,16,2,,,,,OBSERVED (empirical pilot),4.0,3.6,3.7,3.5
+B004,Fitness Enthusiasts,RAG+HITL,Lagos,Yoruba,Social Post,5,10,15,2,,,,,OBSERVED (empirical pilot),4.1,3.7,3.8,3.5
+B005,Entrepreneurs,RAG+HITL,Lagos,Yoruba,Social Post,5,11,16,2,,,,,OBSERVED (empirical pilot),4.0,3.6,3.7,3.5
+B006,Senior Adults,RAG+HITL,Lagos,Yoruba,Social Post,5,12,17,3,,,,,OBSERVED (empirical pilot),3.9,3.4,3.6,3.3
+B007,Rural Communities,RAG+HITL,Lagos,Yoruba,Social Post,6,14,20,3,,,,,OBSERVED (empirical pilot),3.8,3.3,3.5,3.2
+B008,Premium Customers,RAG+HITL,Lagos,Yoruba,Social Post,5,11,16,2,,,,,OBSERVED (empirical pilot),4.1,3.7,3.9,3.6
+B009,Environmentally Conscious,RAG+HITL,Lagos,Yoruba,Social Post,5,11,16,2,,,,,OBSERVED (empirical pilot),4.0,3.6,3.8,3.5
+B010,Corporate Buyers,RAG+HITL,Lagos,Yoruba,Social Post,5,12,17,2,,,,,OBSERVED (empirical pilot),4.0,3.5,3.8,3.4
