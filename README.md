@@ -1,6 +1,6 @@
-# From Fast Drafts to Accepted Assets: code and data
+# Beyond Draft Speed: code and data
 
-This repository holds the code and data behind the article **"From Fast Drafts to Accepted Assets: Prompt Engineering, Retrieval-Augmented Generation and Human-in-the-Loop Review for Generative AI Marketing Content Workflows"** (manuscript submitted to *Information Technology and Management*).
+This repository holds the code and data behind the article **"Beyond Draft Speed: Comparing Manual and Generative AI Marketing Content Workflows on Time, Cost, Quality and Factual Reliability"** (manuscript submitted for peer review).
 
 The study compares four ways of producing marketing content: manual writing, prompt-only generation, retrieval-augmented generation (RAG), and RAG with a six-gate human-in-the-loop review (RAG+HITL). It measures each one up to the point of an **accepted asset**, meaning content a client would approve, rather than stopping at the first AI draft.
 
